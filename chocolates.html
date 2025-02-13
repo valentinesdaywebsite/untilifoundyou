@@ -402,12 +402,13 @@
                 <p>₹200</p>
                 <button class="add-to-cart" data-name="Milk Chocolate" data-price="200">Add to Cart</button>
             </div>
-            <div class="chocolate-card">
+           <div class="chocolate-card">
                 <img src="https://imgs.search.brave.com/YOc9ZG0JYUF644d4GbUM8XMC_0g4bHE-Xcy1TLbqEKk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvNDU4/Njk0NDkzL3Bob3Rv/L3R3aXgtY2FuZHkt/YmFyLmpwZz9zPTYx/Mng2MTImdz0wJms9/MjAmYz1NQ1ZPZ19I/dC0xSmE5dS1LeEpt/bTlYcnRFS1o4Y0tP/d2lEWndCRFdNUXI0/PQ">
                 <h2>Twix</h2>
                 <p>₹70</p>
-                <button class="add-to-cart" data-name="Hazelnut Chocolate" data-price="300">Add to Cart</button>
+                <button class="add-to-cart" data-name="Twix" data-price="70">Add to Cart</button>
             </div>
+
             <div class="chocolate-card">
                 <img src="https://m.media-amazon.com/images/I/41XxJ02urUL._SX300_SY300_QL70_FMwebp_.jpg">
                 <h2>Cadbury Dairy Milk Chocolate Bar</h2>
@@ -518,7 +519,7 @@
             let orderDetails = cart.map(item => `${item.name} - ₹${item.price}`).join("%0A");
             let totalAmount = cart.reduce((sum, item) => sum + item.price, 0);
             let message = `New Order:%0A👤 Name: ${customerName}%0A📞 Contact: ${customerContact}%0A💐 Flowers Ordered:%0A${orderDetails}%0A💰 Total: ₹${totalAmount}`;
-            let phoneNumber = "8921198980";
+            let phoneNumber = "+91 8921198980";
             let whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
 
             window.location.href = whatsappURL;
