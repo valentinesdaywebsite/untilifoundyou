@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Valentine's Day Quizzes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Dancing Script', cursive;
+            text-align: center;
+            background-color: #ffe6e6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: rgb(228, 89, 112);
+            padding: 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .site-name {
+            font-size: 54px;
+            font-weight: bold;
+            font-family: 'Dancing Script', cursive;
+        }
+        .site-name a {
+            text-decoration: none; /* Removes the underline */
+            color: white; /* Ensures the text is white */
+        }
+
+        nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        nav button, .login-button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            font-family: 'Playfair Display';
+            cursor: pointer;
+            padding: 10px 15px;
+            transition: 0.3s;
+        }
+        nav button a {
+            text-decoration: none; /* Removes the underline */
+            color: white; /* Ensures the text is white */
+        }
+
+
+        nav button:hover, .login-button:hover {
+            color: #ffebcd;
+            
+        }
+        nav button a:hover {
+            color: #ffebcd;
+        }
+
+        h1 {
+            color: #ff4d6d; /* Red-pink color */
+            margin-top: 20px;
+        }
+
+        /* Quiz Container */
+        .quiz-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 columns */
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+            font-family: 'Playfair Display';
+
+        }
+
+        /* Individual Quiz Box */
+        .quiz-box {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .quiz-box:hover {
+            transform: scale(1.05);
+        }
+
+        /* Quiz Images */
+        .quiz-box img {
+            width: 100%;
+            height: 150px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        /* Quiz Titles */
+        .quiz-box h2 {
+            font-size: 18px;
+            color: #ff4d6d;
+            margin: 10px 0;
+        }
+
+        /* Quiz Description */
+        .quiz-box p {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        /* Quiz Button */
+        .quiz-button {
+            display: inline-block;
+            background-color: #ff4d6d;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .quiz-button:hover {
+            background-color: #ff1e4d;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .quiz-container {
+                grid-template-columns: repeat(2, 1fr); /* 2 columns for tablets */
+            }
+        }
+
+        @media (max-width: 600px) {
+            .quiz-container {
+                grid-template-columns: repeat(1, 1fr); /* 1 column for mobile */
+            }
+        }
+        footer {
+            background-color: #c44242;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            width: 100%;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin: 10px;
+            text-align: center;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+
+        .footer-section a, .footer-section p {
+            display: block;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            margin-bottom: 5px;
+            font-family: 'Playfair Display';
+
+        }
+
+        .footer-section a:hover {
+            text-decoration: underline;
+        }
+
+        .app-icon {
+            width: 150px;
+            margin: 5px;
+        }
+
+        .footer-text {
+            font-size: 14px;
+            margin-top: 15px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+        /* Floating hearts */
+        .heart-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            color: rgb(215, 34, 94);
+            font-size: 20px;
+            animation: float 5s linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+        }
+        /* Dropdown Styling */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropbtn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            font-family: 'Playfair Display';
+            cursor: pointer;
+            padding: 10px 15px;
+            transition: 0.3s;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: rgb(228, 89, 112);
+            min-width: 250px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 8px;
+            text-align: left;
+            
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            display: block;
+            text-decoration: none;
+            font-size: 20px;
+            font-family: 'Playfair Display';
+        }
+
+        .dropdown-content a:hover {
+            background-color: rgb(200, 40, 70);
+        }
+
+        /* Show dropdown on hover */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            color: #ffebcd;
+        }
+
+        .site-name a {
+            font-size: 54px;
+            text-decoration: none;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    
+
+    <div class="heart-container"></div>
+    <header>
+        <div class="site-name"><a href="index.html">Until I Found You</a></div>
+
+        <nav>
+            <button><a href="gift.html">Gifts & Ideas</a></button>
+    
+            <!-- Dropdown Menu for Quiz & Fun -->
+            <div class="dropdown">
+                <button class="dropbtn">Quiz & Fun</button>
+                <div class="dropdown-content">
+                    <a href="personalisedllandp.html">💌 Personalized Love Letter and Poems</a>
+                    <a href="quiz.html">❤️ Compatibility Quizzes</a>
+                    <a href="scrapbook.html">📖 Scrapbook</a>
+                </div>
+            </div>
+    
+            <div class="dropdown">
+                <button class="dropbtn">Date Planner</button>
+                <div class="dropdown-content">
+                    <a href="calender.html">📅 Calendar</a>
+                    <a href="diy.html">🎨 DIY Date Ideas</a>
+                    <a href="homemade.html">🍽️ Homemade Dinner Ideas</a>
+                    <a href="map.html">🗺️ Google Map Integration</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <h1>Explore Valentine's Day Quizzes!</h1>
+    <div class="quiz-container">
+        <div class="quiz-box">
+            <img src="https://imgs.search.brave.com/bK9ssoBwe4S60VkvFgtJe5t7x-Als19LZbAZxvJ-dnE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/YmZsZHIuY29tL1NI/Nk03ME0zL2FzLzU0/azk4bmZiaHN4ZnB0/c2prY2ZtZjV3Ni9I/YXBweV9WYWxlbnRp/bmVzX0RheV9ieV9h/bGxla3NhbmE_d2lk/dGg9NzE5JmhlaWdo/dD00NjQmZml0PWNy/b3AmYXV0bz13ZWJw" alt="Compatibility Quiz">
+            <h2>Love Compatibility Test</h2>
+            <p>Discover how well you and your partner truly match.</p>
+            <a href="https://www.buzzfeed.com/joannaborns/love-compatibility-quiz" class="quiz-button">Take Quiz</a>
+        </div>
+
+        <div class="quiz-box">
+            <img src="https://imgs.search.brave.com/3YgjH-a-dt0DUrcEF5EGxgU-bQOpTctyzD_PRpnqY9I/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZXJy/aWFtLXdlYnN0ZXIu/Y29tL2Fzc2V0cy9t/dy9pbWFnZXMvcXVp/ei9xdWl6LWdsb2Jh/bC1zaWRlLXdpZGdl/dC9oYXBweS12YWxl/bnRpbmVzLWRheS0z/MzU4LWFiYWUzYmFi/NjBlNzY5NGIxOTdj/YmNmN2NhZTc2MmYw/QDF4LmpwZw" alt="Love Language Quiz">
+            <h2>What’s Your Love Language?</h2>
+            <p>Find out how you best express and receive love.</p>
+            <a href="https://www.5lovelanguages.com/quizzes/" class="quiz-button">Take Quiz</a>
+        </div>
+
+        <div class="quiz-box">
+            <img src="https://imgs.search.brave.com/bjzZpYkMbu42c0CyMhj8FjRwVzYUSWgRXh6KPH6lMk0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuc3F1YXJlc3Bh/Y2UtY2RuLmNvbS9j/b250ZW50L3YxLzU4/NzJkYzZhODQxOWMy/ZmFiMjU4NTJhMy9k/Y2QyYmViNS1jMTdi/LTQzNTYtOTZlZC0w/NTZiNzljNzQwNDEv/VmFsZW50aW5lc19E/YXlfVHJpdmlhX1F1/ZXN0aW9uc19LcmFm/dHlMYWJfMDUuanBn" alt="Relationship Readiness Quiz">
+            <h2>Are You Ready for a Serious Relationship?</h2>
+            <p>Determine if you're emotionally prepared for commitment.</p>
+            <a href="https://www.psychologytoday.com/us/tests/relationship/relationship-readiness-quiz" class="quiz-button">Take Quiz</a>
+        </div>
+
+        <div class="quiz-box">
+            <img src="https://imgs.search.brave.com/qvvKWKU-K0kp2w9D1M1gydMCHq_CaS01Kb7jgnJfglc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuc3F1YXJlc3Bh/Y2UtY2RuLmNvbS9j/b250ZW50L3YxLzU4/NzJkYzZhODQxOWMy/ZmFiMjU4NTJhMy8x/ZjJlMmE1ZC0wZmUx/LTQ0NDMtOTE0OC1h/ZjFiNjJjODJlNmUv/VmFsZW50aW5lc19E/YXlfVHJpdmlhX1F1/ZXN0aW9uc19LcmFm/dHlMYWJfMDMuanBn" alt="Movie Couple Quiz">
+            <h2>Which Romantic Movie Couple Are You?</h2>
+            <p>Find out which famous love story resembles yours.</p>
+            <a href="https://www.zimbio.com/quiz/1yM6gY5rW0L/Which+Romantic+Movie+Couple+Are+You" class="quiz-button">Take Quiz</a>
+        </div>
+
+        <div class="quiz-box">
+            <img src="https://imgs.search.brave.com/r86TwuGe9EdKnGsuMo0H097rJRzGdnmJe9Q3PMUmXEI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9oaXBz/LmhlYXJzdGFwcHMu/Y29tL2htZy1wcm9k/L2ltYWdlcy9jbG9z/ZS11cC1vZi1yb3Nl/cy1ib3VxdWV0LXJv/eWFsdHktZnJlZS1p/bWFnZS0xNzA1NDIx/MDg4LmpwZz9jcm9w/PTAuNjY2MzV4dzox/eGg7Y2VudGVyLHRv/cCZyZXNpemU9OTgw/Oio" alt="Valentine's Day Trivia">
+            <h2>Valentine’s Day Trivia Challenge</h2>
+            <p>Test your knowledge of love traditions, history, and fun facts!</p>
+            <a href="https://parade.com/1158778/jessicasager/valentines-day-trivia/" class="quiz-button">Take Quiz</a>
+        </div>
+
+        <div class="quiz-box">
+            <img src="https://imgs.search.brave.com/Mszno_j4KcD2LX9YiLHVCwafWgHKwRTQdzMdXGBUyXU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/cXVpemx5LmNvL3dw/LWNvbnRlbnQvdXBs/b2Fkcy8yMDE2LzAx/LzA2MDM0OTQ2L0l0/YWx5LVJvbWFuLVJ1/aW5zLmpwZw" alt="Perfect Date Quiz">
+            <h2>Your Perfect Valentine’s Date Based on Your Personality</h2>
+            <p>Get personalized date ideas based on your interests.</p>
+            <a href="https://www.buzzfeed.com/quizparty/your-perfect-valentines-date-based-on-your-personality" class="quiz-button">Take Quiz</a>
+        </div>
+
+        <div class="quiz-box">
+            <img src="https://imgs.search.brave.com/DG8Jc2uixxkBHL2y48JP6_MkEGcPlymezebUPM8g87c/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/cXVpemx5LmNvL3dw/LWNvbnRlbnQvdXBs/b2Fkcy8yMDE2LzAx/LzI5MTgyMzUxL1do/aXRlLVJvc2VzLmpw/Zw" alt="Romantic Personality Quiz">
+            <h2>How Romantic Are You?</h2>
+            <p>See if you're a hopeless romantic or a love skeptic.</p>
+            <a href="https://www.proprofs.com/quiz-school/story.php?title=how-romantic-are-you" class="quiz-button">Take Quiz</a>
+        </div>
+
+        <div class="quiz-box">
+            <img src="https://imgs.search.brave.com/Gdvik4gHwvwBKcYdBBPeGN0Xf_1sqidoPaFr69aIeL4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/cXVpemx5LmNvL3dw/LWNvbnRlbnQvdXBs/b2Fkcy8yMDE2LzAx/LzI5MTgyMjQ5L0hl/YXJ0LVN1bnNldC5q/cGc" alt="Celebrity Valentine Quiz">
+            <h2>Who is Your Celebrity Valentine?</h2>
+            <p>Discover which famous person would be your ideal match.</p>
+            <a href="https://www.zimbio.com/quiz/1yM6gY5rW0L/Which+Romantic+Movie+Couple+Are+You" class="quiz-button">Take Quiz</a>
+        </div>
+
+        <div class="quiz-box">
+            <img src="https://imgs.search.brave.com/4IX23MUAeDqxbSauw4IvF-LmFqjiuj4fw8khJe-3HZs/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/cXVpenRyaXZpYWdh/bWVzLmNvbS93cC1j/b250ZW50L3VwbG9h/ZHMvMjAyMi8wMS9G/b3VyLXZhbGVudGlu/ZXMtY3VwY2FrZXMu/anBn" alt="Flirting Style Quiz">
+            <h2>Are You a Good Flirt?</h2>
+            <p>Test your flirting skills and find out if you're charming or awkward.</p>
+            <a href="https://www.gotoquiz.com/are_you_a_good_flirt" class="quiz-button">Take Quiz</a>
+        </div>
+   </div>
+   <footer>
+    <div class="footer-container">
+       
+
+        <!-- Quick Links Section -->
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <a href="val.html">🏠Home</a>
+            <a href="about.html">📆Date & Ideas</a>
+            <a href="contact.html">🎁Gift & Ideas</a>
+
+        </div>
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <a href="contact.html">🧸Quiz & Fun</a>
+            <a href="gifts.html">🗓️Date Planner</a>
+            <a href="gifts.html">🔑Login</a>
+
+        </div>
+
+        <!-- Social Media Section -->
+        <div class="footer-section">
+            <h3>Follow Us On Instagram</h3>
+            <p><a href="https://www.instagram.com/_.nehehe._/">Instagram: _.nehehe._</a></p>
+            <p><a href="https://www.instagram.com/_._a.r.y.a.a_._/">Instagram: _._a.r.y.a.a_._</a></p>
+        </div>
+        <div class="footer-section">
+            <h3>Email</h3>
+            <p><a href="https://mail.google.com/mail/?view=cm&fs=1&to=nehamanoj1105@gmail.com" target="_blank">📧 nehamanoj1105@gmail.com</a></p>
+            <p><a href="https://mail.google.com/mail/?view=cm&fs=1&to=arya118251.2005@gmail.com" target="_blank">📧 arya118251.2005@gmail.com</a></p>
+
+        </div>
+        
+    </div>
+    <p class="footer-text">© 2025 Valentine's Special. All rights reserved.</p>
+    </div>
+    </footer>
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.classList.add('heart');
+            document.querySelector('.heart-container').appendChild(heart);
+
+            const size = Math.random() * 20 + 10; // Random size
+            heart.style.fontSize = `${size}px`;
+            heart.style.left = `${Math.random() * 100}vw`; // Random horizontal position
+            heart.style.animationDuration = `${Math.random() * 3 + 3}s`; // Random speed
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000); // Remove heart after animation ends
+        }
+
+        setInterval(createHeart, 500); // Create hearts every 0.5s
+    </script>
+    </div>
+ </body>
+</html>
