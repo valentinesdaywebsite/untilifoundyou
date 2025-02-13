@@ -462,44 +462,42 @@
         <br>
         <br>
         <div class="flowers-grid">
-            <div class="flowers-grid">
             <div class="flower-card">
                 <img src="https://imgs.search.brave.com/p7sfv64d9ivQCBY0mjhRTyKQ5qgITG8_2RSkXEOb70w/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTAy/NDE2NDE0L3Bob3Rv/L3dvbWFuLWhvbGRp/bmctYS1zaW5nbGUt/cm9zZS1jbG9zZS11/cC1vZi1oYW5kLmpw/Zz9zPTYxMng2MTIm/dz0wJms9MjAmYz1Y/bFcyaW1mQ0lYYk04/ZF83azF1TzdtQmd2/NjhUd0o5cm55azV6/M1g2R3UwPQ">
                 <h2>Red Roses</h2>
-                <button class="add-to-cart" data-name="Red Roses" >Add to Cart</button>
+                <!-- <p>₹500</p> -->
+                <button class="add-to-cart" data-name="Red Roses">Add to Cart</button>
             </div>
-            
             <div class="flower-card">
                 <img src="https://imgs.search.brave.com/TRD9eKPRs1rTdeSV9Xr4DlnNy6qQCTUfA3PuuUigd9Y/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvNjY1/MzY0ODQyL3Bob3Rv/L3R1bGlwLWZsb3dl/cnMuanBnP3M9NjEy/eDYxMiZ3PTAmaz0y/MCZjPVZtcDJ3OFEx/UEloMGlHbDV5VmEw/blFmLS1FTzFRNS1L/MTRHUUd3bUt2RjQ9">
                 <h2>Pink Tulips</h2>
-                <button class="add-to-cart" data-name="Pink Tulips">Add to Cart</button>
+                <!-- <p>₹400</p> -->
+                <button class="add-to-cart" data-name="Pink Lilies">Add to Cart</button>
             </div>
-            
             <div class="flower-card">
                 <img src="https://imgs.search.brave.com/0VfNBkGsNpUmQoVu_jYM3H0Vas2SZx7ZaO_ObWrn-pA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvODE3/MTE5MDYvcGhvdG8v/dHdvLXdoaXRlLXJv/c2VzLmpwZz9zPTYx/Mng2MTImdz0wJms9/MjAmYz1YSm85MTMy/NW45X01JdlVoeE9R/dm05elRBd21xWFNB/NGJUWDZVTHYtNWVR/PQ">
                 <h2>White Roses</h2>
-                <button class="add-to-cart" data-name="White Roses" >Add to Cart</button>
+                <!-- <p>₹500</p> -->
+                <button class="add-to-cart" data-name="Red Roses" >Add to Cart</button>
             </div>
-            
             <div class="flower-card">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzWd7h-j37sx-XfozN_W_Sin8BVPluFun7oQ&s">
-                <h2>Bouquet of Roses</h2>
-                <button class="add-to-cart" data-name="Bouquet of Roses" >Add to Cart</button>
+                <h2>Boquet Of Roses</h2>
+                <!-- <p>₹400</p> -->
+                <button class="add-to-cart" data-name="Pink Lilies" >Add to Cart</button>
             </div>
-            
             <div class="flower-card">
                 <img src="https://imgs.search.brave.com/NcaRSQbfOfDTnFOz9DYX0MJ-Qk8Zo2IQ5Bd7Wow20TY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvODc1/MzQyNzYyL3Bob3Rv/L2JlYXV0aWZ1bC1w/aW5rLWxvdHVzLWZs/b3dlci5qcGc_cz02/MTJ4NjEyJnc9MCZr/PTIwJmM9MW5ISW5V/ZlZxZTVpU0Nualc0/UVRjY1ViTF9TUkhR/Z2FZUEVoTFRzT2tZ/ST0">
                 <h2>Lotus</h2>
-                <button class="add-to-cart" data-name="Lotus">Add to Cart</button>
+                <!-- <p>₹500</p> -->
+                <button class="add-to-cart" data-name="Red Roses" >Add to Cart</button>
             </div>
-            
             <div class="flower-card">
                 <img src="https://imgs.search.brave.com/yOZ41MTglk7B25Lmz03TFWflO3-oqDF1G8heLz-l1AA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLmV0/c3lzdGF0aWMuY29t/LzQ4MDcwNTgxL3Iv/aWwvNTE1MjNlLzU3/NTQyMTk0NjAvaWxf/NjAweDYwMC41NzU0/MjE5NDYwX2luODEu/anBn">
                 <h2>Paper Roses</h2>
-                <button class="add-to-cart" data-name="Paper Roses">Add to Cart</button>
+                <!-- <p>₹400</p> -->
+                <button class="add-to-cart" data-name="Pink Lilies" >Add to Cart</button>
             </div>
-        </div>
-
         </div>
     </div>
 
@@ -593,7 +591,7 @@
             let orderDetails = cart.map(item => `${item.name} - ₹${item.price}`).join("%0A");
             let totalAmount = cart.reduce((sum, item) => sum + item.price, 0);
             let message = `New Order:%0A👤 Name: ${customerName}%0A📞 Contact: ${customerContact}%0A💐 Flowers Ordered:%0A${orderDetails}%0A💰 Total: ₹${totalAmount}`;
-            let phoneNumber = "+91 8921198980";
+            let phoneNumber = "8921198980";
             let whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
 
             window.location.href = whatsappURL;
