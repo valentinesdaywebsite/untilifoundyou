@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flip Calendar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Dancing Script', cursive;
+            text-align: center;
+            background-color: #ffe6e6;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: rgb(228, 89, 112);
+            padding: 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .site-name {
+            font-size: 54px;
+            font-weight: bold;
+        }
+        .site-name a {
+            text-decoration: none; /* Removes the underline */
+            color: white; /* Ensures the text is white */
+        }
+
+        nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 24px;
+            font-family: 'Playfair Display';
+            padding: 10px 15px;
+        }
+
+        nav a:hover {
+            color: #ffebcd;
+        }
+        nav button {
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        nav button a {
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+            font-size: 24px;
+            font-family: 'Playfair Display';
+            padding: 10px 15px;
+        }
+
+        nav button a:hover {
+            color: #ffebcd;
+        }
+
+
+        
+        /* Floating hearts */
+        .heart-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            color: rgb(215, 34, 94);
+            font-size: 20px;
+            animation: float 5s linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+        }
+
+
+        .calendar-container {
+            background-color: pink;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            width: 555px;
+            height: 450px;
+            text-align: center;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .flip-btn {
+            background-color: #ef3d5b;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            cursor: pointer;
+            border-radius: 6px;
+            font-size: 18px;
+        }
+
+        #monthYear {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            grid-gap: 6px;
+        }
+
+        .calendar .day {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .calendar .day:hover {
+            background-color: #f62257;
+            color: white;
+        }
+
+        .calendar .today {
+            background-color: #ff4081;
+            color: white;
+            box-shadow: 0 0 10px rgba(255, 64, 129, 0.6);
+        }
+
+        .message-box {
+            margin-top: 25px;
+            background-color: #f8869d;
+            color: #5f030d;
+            padding: 10px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+            font-weight:bolder;
+            font-size: larger;
+            display: none;
+        }
+        footer {
+            background-color: #c44242;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: auto;
+            width: 100%;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin: 10px;
+            text-align: center;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+
+        .footer-section a, .footer-section p {
+            display: block;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            margin-bottom: 5px;
+            font-family: 'Playfair Display';
+
+        }
+
+        .footer-section a:hover {
+            text-decoration: underline;
+        }
+        /* Dropdown Styling */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropbtn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            font-family: 'Playfair Display';
+            cursor: pointer;
+            padding: 10px 15px;
+            transition: 0.3s;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: rgb(228, 89, 112);
+            min-width: 250px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 8px;
+            text-align: left;
+            
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            display: block;
+            text-decoration: none;
+            font-size: 20px;
+            font-family: 'Playfair Display';
+        }
+
+        .dropdown-content a:hover {
+            background-color: rgb(200, 40, 70);
+        }
+
+        /* Show dropdown on hover */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            color: #ffebcd;
+        }
+
+        .site-name a {
+            font-size: 54px;
+            text-decoration: none;
+            color: white;
+        }
+        @media (max-width: 1024px) {
+    .calendar-container {
+        width: 90%;
+        height: auto;
+    }
+
+    .calendar .day {
+        width: 50px;
+        height: 50px;
+        font-size: 12px;
+    }
+
+    .site-name {
+        font-size: 40px;
+    }
+
+    nav a {
+        font-size: 20px;
+    }
+
+    .dropbtn {
+        font-size: 20px;
+    }
+
+    .footer-section h3 {
+        font-size: 18px;
+    }
+
+    .footer-section a {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .calendar-container {
+        width: 95%;
+        height: auto;
+        padding: 10px;
+    }
+
+    .calendar .day {
+        width: 40px;
+        height: 40px;
+        font-size: 10px;
+    }
+
+    .site-name {
+        font-size: 36px;
+    }
+
+    nav a {
+        font-size: 18px;
+    }
+
+    .dropbtn {
+        font-size: 18px;
+    }
+
+    .footer-section {
+        text-align: center;
+        min-width: 100%;
+    }
+
+    .footer-section h3 {
+        font-size: 16px;
+    }
+
+    .footer-section a {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .site-name {
+        font-size: 28px;
+    }
+
+    .calendar-container {
+        width: 100%;
+        padding: 8px;
+    }
+
+    .calendar .day {
+        width: 35px;
+        height: 35px;
+        font-size: 9px;
+    }
+
+    nav a {
+        font-size: 16px;
+    }
+
+    .dropbtn {
+        font-size: 16px;
+    }
+
+    .flip-btn {
+        font-size: 16px;
+        padding: 5px 10px;
+    }
+
+    .footer-section h3 {
+        font-size: 14px;
+    }
+
+    .footer-section a {
+        font-size: 12px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="site-name"><a href="index.html">Until I Found You</a></div>
+
+        <nav>
+            <button><a href="gift.html">Gifts & Ideas</a></button>
+    
+            <!-- Dropdown Menu for Quiz & Fun -->
+            <div class="dropdown">
+                <button class="dropbtn">Quiz & Fun</button>
+                <div class="dropdown-content">
+                    <a href="personalisedllandp.html">💌 Personalized Love Letter and Poems</a>
+                    <a href="quiz.html">❤️ Compatibility Quizzes</a>
+                    <a href="scrapbook.html">📖 Scrapbook</a>
+                </div>
+            </div>
+    
+            <div class="dropdown">
+                <button class="dropbtn">Date Planner</button>
+                <div class="dropdown-content">
+                    <a href="calender.html">📅 Calendar</a>
+                    <a href="diy.html">🎨 DIY Date Ideas</a>
+                    <a href="homemade.html">🍽️ Homemade Dinner Ideas</a>
+                    <a href="map.html">🗺️ Google Map Integration</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- Floating hearts -->
+    <div class="heart-container"></div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <button class="flip-btn" id="prevMonth">Previous</button>
+            <h2 id="monthYear"></h2>
+            <button class="flip-btn" id="nextMonth">Next</button>
+        </div>
+        <div class="calendar" id="calendar"></div>
+    </div>
+
+    <div id="messageBox" class="message-box"></div>
+    <footer>
+    
+        <div class="footer-container">
+               
+        
+                <!-- Quick Links Section -->
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="val.html">🏠Home</a>
+                    <a href="about.html">📆Date & Ideas</a>
+                    <a href="contact.html">🎁Gift & Ideas</a>
+    
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="contact.html">🧸Quiz & Fun</a>
+                    <a href="gifts.html">🗓️Date Planner</a>
+                    <a href="gifts.html">🔑Login</a>
+    
+                </div>
+        
+                <!-- Social Media Section -->
+                <div class="footer-section">
+                    <h3>Follow Us On Instagram</h3>
+                    <p><a href="https://www.instagram.com/_.nehehe._/">Instagram: _.nehehe._</a></p>
+                    <p><a href="https://www.instagram.com/_._a.r.y.a.a_._/">Instagram: _._a.r.y.a.a_._</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Email</h3>
+                    <p><a href="https://mail.google.com/mail/?view=cm&fs=1&to=nehamanoj1105@gmail.com" target="_blank">📧 nehamanoj1105@gmail.com</a></p>
+                    <p><a href="https://mail.google.com/mail/?view=cm&fs=1&to=arya118251.2005@gmail.com" target="_blank">📧 arya118251.2005@gmail.com</a></p>
+    
+                </div>
+                
+                <p class="footer-text">© 2025 Valentine's Special. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+        // Floating hearts effect
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.classList.add('heart');
+            document.querySelector('.heart-container').appendChild(heart);
+
+            const size = Math.random() * 20 + 10; // Random size
+            heart.style.fontSize = `${size}px`;
+            heart.style.left = `${Math.random() * 100}vw`; // Random position
+            heart.style.animationDuration = `${Math.random() * 3 + 3}s`; // Random speed
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000); // Remove heart after animation
+        }
+
+        setInterval(createHeart, 500); 
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        let currentMonth = new Date().getMonth();
+        let currentYear = new Date().getFullYear();
+        let today = new Date().getDate();
+        let thisMonth = new Date().getMonth();
+        let thisYear = new Date().getFullYear();
+        const messages = [
+    "You are doing amazing today!", "Keep up the great work!", "Today is a good day to start something new!", 
+    "Believe in yourself, you're awesome!", "Stay positive, good things are coming!", "You are loved more than you know!", 
+    "Every day is a fresh start, make it count!", "Happiness looks good on you!", "You're stronger than you think!", 
+    "Life is full of beautiful moments, enjoy them!", "Smile! The world needs your light!", "A little progress each day adds up to big results!", 
+    "You bring so much joy to those around you!", "Never stop dreaming, great things await!", "Kindness is your superpower!", 
+    "You are capable of amazing things!", "Your potential is limitless!", "The best is yet to come!", "Make today ridiculously amazing!", 
+    "You are enough just as you are!", "Believe in miracles, they happen every day!", "Your smile can brighten anyone’s day!", 
+    "Good vibes only today!", "You make the world a better place!", "Chase your dreams with all your heart!", 
+    "Your kindness is contagious!", "You are magic, never forget that!", "The universe is cheering for you!", 
+    "Every small step is a step forward!", "You have a heart of gold!", "Stay curious, the world is full of wonders!", 
+    "You are more powerful than your doubts!", "Happiness is a choice—choose it today!", "Do what makes your soul shine!", 
+    "Your laughter is music to the world!", "Dream big, sparkle more, shine bright!", "You are worthy of all the love and happiness!", 
+    "Make today a masterpiece!", "Embrace the magic of new beginnings!", "You are a ray of sunshine!", 
+    "Love yourself a little extra today!", "Your heart is full of kindness!", "Celebrate your small victories!", 
+    "The world needs more people like you!", "Your energy is contagious!", "You're someone’s reason to smile today!", 
+    "You light up the world with your kindness!", "Trust yourself, you’re doing great!", "Radiate positivity and watch it return!", 
+    "The sun always shines after the rain!", "Never forget how special you are!", "You make life sweeter!", 
+    "Keep believing in yourself!", "Let go of worries and embrace joy!", "Your dreams are valid and achievable!", 
+    "Life is a beautiful journey, enjoy it!", "You have the power to inspire others!", "Even the stars shine because of darkness!", 
+    "Take a deep breath, you're doing fine!", "Be a rainbow in someone else’s cloud!", "You are a walking miracle!", 
+    "Sprinkle kindness everywhere!", "You are a gift to this world!", "Your kindness makes a difference!", 
+    "Don’t be afraid to shine!", "You are unique and wonderful!", "Every day is a new adventure!", 
+    "Kindness never goes unnoticed!", "Keep spreading happiness!", "Joy is found in the little things!", 
+    "You deserve all the happiness in the world!", "Your soul is beautiful!", "Be fearless in the pursuit of joy!", 
+    "You make the world brighter just by being you!", "Follow your heart, it knows the way!", "A positive mind creates a positive life!", 
+    "Believe in your sparkle!", "Your kindness changes lives!", "You are irreplaceable!", "Find joy in the ordinary!", 
+    "You are a treasure!", "Your presence is a blessing!", "You radiate warmth and kindness!", 
+    "Dare to dream big!", "Today is full of endless possibilities!", "Your smile is pure magic!", 
+    "You are doing better than you think!", "Be your own sunshine!", "You are loved more than words can express!", 
+    "Let your inner light shine!", "Your uniqueness is your superpower!", "Life loves you back!", 
+    "Happiness begins with you!", "You are capable of greatness!", "Your kindness is your strength!", 
+    "Every day is a gift, cherish it!", "Your potential is boundless!", "You are the definition of joy!", 
+    "You make a difference!", "You are someone’s sunshine!", "Hope is a beautiful thing!", 
+    "Stay wild and free!", "You were born to be happy!", "Your positivity is inspiring!", 
+    "Shine like the star you are!", "You deserve all things wonderful!", "Be gentle with yourself!", 
+    "You are more than enough!", "Celebrate your uniqueness!", "You are truly one of a kind!", 
+    "Life is brighter with you in it!", "Follow your bliss!", "Be kind to yourself!", 
+    "Trust that the universe has your back!", "You bring color to the world!", "Every moment is a fresh start!", 
+    "Keep chasing your dreams!", "You are beautifully brave!", "Your heart is full of love!", 
+    "Let joy be your guide!", "Your journey is amazing!", "You deserve to be happy!", 
+    "Every little act of kindness counts!", "Never stop believing in yourself!", "You are deeply loved!", 
+    "Happiness flows from within!", "You have a heart of gold!", "You are a masterpiece!", 
+    "Your kindness is your legacy!", "The world is lucky to have you!", "Your dreams are waiting for you!", 
+    "You are a warrior of love and light!", "You are a blessing to others!", "You make the world a better place!", 
+    "Let love lead the way!", "You bring out the best in people!", "Your happiness is a gift to the world!", 
+    "Your life is a beautiful story!", "You are stronger than your fears!", "Every day is a chance to shine!", 
+    "You deserve all the joy in the world!", "Keep going, you’re unstoppable!", "The world needs your sparkle!", 
+    "You are worthy of love and kindness!", "Never stop spreading love!", "Happiness is your birthright!", 
+    "Life is full of magic—embrace it!", "You are an inspiration!", "Your kindness is golden!", 
+    "Keep shining, the world needs your light!", "Make today special, because you are special!", 
+    "Your heart is full of love!", "You are a source of light and happiness!", "The best things in life are yet to come!", 
+    "Stay joyful, stay you!", "Your dreams are worth it!", "The world smiles because of you!", 
+    "Keep radiating love and happiness!", "Believe in magic—it’s everywhere!", "Your kindness creates ripples!", 
+    "You are a bright star in the sky!", "Celebrate yourself every day!", "The universe is cheering you on!", 
+    "You have everything you need to be happy!", "You bring happiness wherever you go!", "Your soul is filled with light!", 
+    "Be your own reason to smile!", "Shine bright like the sun!", "You are capable of anything!", 
+    "Every moment with you is special!", "Love yourself like you love others!", "Your laughter is a melody of joy!", 
+    "Stay true to yourself, you’re perfect!", "You are a masterpiece in progress!", "The world is better with you in it!", 
+    "Never underestimate the power of a smile!", "Today is yours to enjoy!", "You are someone’s best reason to smile!", 
+    "Life’s little joys are the best!", "Embrace the beauty of the present moment!", "Your happiness is contagious!", 
+    "Every day is a chance to be better!", "Let your dreams take flight!", "You are the light someone needs today!"
+    ];
+
+        const monthYearElement = document.getElementById("monthYear");
+        const calendarElement = document.getElementById("calendar");
+        const messageBox = document.getElementById("messageBox");
+        const prevMonthButton = document.getElementById("prevMonth");
+        const nextMonthButton = document.getElementById("nextMonth");
+
+        function generateCalendar(month, year) {
+            const firstDayOfMonth = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            monthYearElement.textContent = `${monthNames[month]} ${year}`;
+            calendarElement.innerHTML = "";
+            for (let i = 0; i < firstDayOfMonth; i++) {
+                const emptyDiv = document.createElement("div");
+                calendarElement.appendChild(emptyDiv);
+            }
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayDiv = document.createElement("div");
+                dayDiv.textContent = day;
+                dayDiv.classList.add("day");
+                if (day === today && month === thisMonth && year === thisYear) {
+                    dayDiv.classList.add("today");
+                }
+                dayDiv.addEventListener("click", () => showMessage(day));
+                calendarElement.appendChild(dayDiv);
+            }
+        }
+
+        function showMessage(day) {
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            messageBox.textContent = `Day ${day}: ${randomMessage}`;
+            messageBox.style.display = "block";
+            
+        }
+
+        prevMonthButton.addEventListener("click", () => {
+            currentMonth = (currentMonth === 0) ? 11 : currentMonth - 1;
+            currentYear = (currentMonth === 11) ? currentYear - 1 : currentYear;
+            generateCalendar(currentMonth, currentYear);
+        });
+
+        nextMonthButton.addEventListener("click", () => {
+            currentMonth = (currentMonth === 11) ? 0 : currentMonth + 1;
+            currentYear = (currentMonth === 0) ? currentYear + 1 : currentYear;
+            generateCalendar(currentMonth, currentYear);
+        });
+
+        generateCalendar(currentMonth, currentYear);
+    </script>
+</body>
+</html>

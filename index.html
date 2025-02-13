@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+        
+
+        body {
+            background-color: pink;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            /* padding: 20px; */
+            overflow-x: hidden;
+        }
+
+        /* Floating hearts */
+        .heart-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            color: rgb(215, 34, 94);
+            font-size: 20px;
+            animation: float 5s linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+        }
+
+        .populartoday {
+            background-color: rgb(235, 156, 170);
+            padding: 20px;
+            border-radius: 20px;
+            margin: 20px auto;
+            width: 75%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            font-size: 60px;
+            color: rgb(215, 34, 94);
+            font-family: 'Dancing Script', cursive;
+        }
+        .tabs-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .tab {
+            background-color: rgb(215, 34, 94);
+            color: white;
+            padding: 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+            transition: 0.3s;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100px;
+            width: 85%;
+        }
+        .tab:hover {
+            background-color: rgb(180, 20, 70);
+        }
+
+        /* Slideshow styles */
+        .slideshow-container {
+            position: relative;
+            max-width: 900px;
+            height: 400px;
+            margin: 30px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .slide {
+            display: none;
+            font-size: 50px;
+            font-weight: bold;
+            color: rgb(215, 34, 94);
+        }
+        .active {
+            display: block;
+        }
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 10px;
+            font-size: 20px;
+            color: white;
+            background: rgb(215, 34, 94);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+       
+
+        .prev { left: 10px; }
+        .next { right: 10px; }
+        .prev:hover, .next:hover {
+            background: rgb(180, 20, 70);
+        }
+        header {
+            background-color: rgb(228, 89, 112);
+            padding: 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .site-name {
+            font-size: 54px;
+            font-weight: bold;
+            font-family: 'Dancing Script', cursive;
+
+        }
+        .site-name .nav
+        {
+            font-family: 'Courier New', Courier, monospace;
+        }
+        nav {
+            display: flex;
+            gap: 15px;
+        }
+        nav button, .login-button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .valentine-container {
+            margin-top: 20px;
+            padding: 40px;
+            background-color: #ffb3b3;
+            border-radius: 10px;
+            display: inline-block;
+            font-size: 54px;
+            font-weight: bold;
+            text-align: center;
+            width: 80%;
+        }
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .countdown div {
+            background: white;
+            width: 120px;
+            height: 150px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+            font-weight: bold;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        .countdown div::before {
+            content: '';
+            width: 100%;
+            height: 20px;
+            background: #ff4d4d;
+            position: absolute;
+            top: 0;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .countdown label {
+            font-size: 18px;
+            font-weight: normal;
+            margin-top: 10px;
+        }
+        .valentine-container, .populartoday, .slideshow-container {
+        max-width: 1200px;
+        width: 100%;
+        margin: 30px auto;
+
+        }
+        .slideshow-container {
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        h1, h2, h3, p, span, button, nav, .tab, .countdown label {
+            font-family: 'Dancing Script', cursive;
+        }
+
+        button, .tab {
+            font-size: 34px;
+        }
+
+        .countdown span {
+            font-size: 60px;
+        }
+        nav button, .login-button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 34px; /* Increased size */
+            font-family: 'Playfair Display';
+            cursor: pointer;
+            padding: 15px 25px; /* Added padding */
+            transition: 0.3s;
+        }
+        nav button a {
+            text-decoration: none; /* Removes the underline */
+            color: white; /* Ensures the text is white */
+        }
+
+
+        nav button:hover, .login-button:hover {
+            color: #ffebcd; /* Light color on hover */
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Dancing Script', cursive;
+            text-align: center;
+            background-color: #ffe6e6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: rgb(228, 89, 112);
+            padding: 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .site-name {
+            font-size: 54px;
+            font-weight: bold;
+            font-family: 'Dancing Script', cursive;
+        }
+        .site-name a {
+            text-decoration: none; /* Removes the underline */
+            color: white; /* Ensures the text is white */
+        }
+
+        nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        nav button, .login-button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            font-family: 'Playfair Display';
+            cursor: pointer;
+            padding: 10px 15px;
+            transition: 0.3s;
+        }
+        nav button a {
+            text-decoration: none; /* Removes the underline */
+            color: white; /* Ensures the text is white */
+        }
+
+
+        nav button:hover, .login-button:hover {
+            color: #ffebcd;
+            transform: scale(1.1);
+            
+        }
+        footer {
+            background-color: #c44242;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            width: 100%;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin: 10px;
+            text-align: center;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+
+        .footer-section a, .footer-section p {
+            display: block;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            margin-bottom: 5px;
+            font-family: 'Playfair Display';
+
+        }
+
+        .footer-section a:hover {
+            text-decoration: underline;
+        }
+
+        .app-icon {
+            width: 150px;
+            margin: 5px;
+        }
+
+        .footer-text {
+            font-size: 14px;
+            margin-top: 15px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+        /* Dropdown Styling */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropbtn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            font-family: 'Playfair Display';
+            cursor: pointer;
+            padding: 10px 15px;
+            transition: 0.3s;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: rgb(228, 89, 112);
+            min-width: 250px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 8px;
+            text-align: left;
+            
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            display: block;
+            text-decoration: none;
+            font-size: 20px;
+            font-family: 'Playfair Display';
+        }
+
+        .dropdown-content a:hover {
+            background-color: rgb(200, 40, 70);
+        }
+
+        /* Show dropdown on hover */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            color: #ffebcd;
+        }
+
+        nav button a:hover {
+            color: #ffebcd;
+        }
+        /* Mobile Devices */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    nav {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+
+    nav button {
+        font-size: 18px;
+        padding: 8px;
+    }
+
+    .tabs-container {
+        grid-template-columns: 1fr;
+        width: 90%;
+    }
+
+    .tab {
+        font-size: 16px;
+        padding: 15px;
+        height: auto;
+        width: 100%;
+    }
+
+    .valentine-container {
+        font-size: 32px;
+        padding: 20px;
+    }
+
+    .countdown {
+        flex-direction: row;
+    }
+
+    .countdown div {
+        width: 100px;
+        height: 100px;
+        font-size: 30px;
+    }
+
+    .slideshow-container {
+        height: auto;
+        padding: 10px;
+    }
+}
+
+/* Tablets */
+@media (max-width: 1024px) {
+    .tabs-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .valentine-container {
+        font-size: 42px;
+    }
+
+    .countdown span {
+        font-size: 40px;
+    }
+}
+
+/* Large Screens */
+@media (min-width: 1200px) {
+    .tabs-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .valentine-container {
+        max-width: 1200px;
+    }
+}
+
+.site-name a {
+            font-size: 54px;
+            text-decoration: none;
+            color: white;
+        }
+
+</style>
+    </style>
+</head>
+<body>
+
+    <!-- Floating hearts -->
+    <div class="heart-container"></div>
+    <header>
+        <div class="site-name"><a href="index.html">Until I Found You</a></div>
+
+        <nav>
+            <button><a href="gift.html">Gifts & Ideas</a></button>
+    
+            <!-- Dropdown Menu for Quiz & Fun -->
+            <div class="dropdown">
+                <button class="dropbtn">Quiz & Fun</button>
+                <div class="dropdown-content">
+                    <a href="personalisedllandp.html">💌 Personalized Love Letter and Poems</a>
+                    <a href="quiz.html">❤️ Compatibility Quizzes</a>
+                    <a href="scrapbook.html">📖 Scrapbook</a>
+                </div>
+            </div>
+    
+            <div class="dropdown">
+                <button class="dropbtn">Date Planner</button>
+                <div class="dropdown-content">
+                    <a href="calender.html">📅 Calendar</a>
+                    <a href="diy.html">🎨 DIY Date Ideas</a>
+                    <a href="homemade.html">🍽️ Homemade Dinner Ideas</a>
+                    <a href="map.html">🗺️ Google Map Integration</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    
+    <div class="valentine-container">
+        <p>Countdown to Valentine's Day:</p>
+        <p>"💕 Valentine's Day — a celebration of love in all forms! Whether with a partner, friends, or treating yourself, there's a perfect spot for you!"</p>
+        <div class="countdown" id="countdown">
+            <div><span id="days">00</span><label>Days</label></div>
+            <div><span id="hours">00</span><label>Hours</label></div>
+            <div><span id="minutes">00</span><label>Minutes</label></div>
+            <div><span id="seconds">00</span><label>Seconds</label></div>
+        </div>
+    </div>
+
+    <div class="populartoday">
+        <h1>Popular Today</h1>
+        <div class="tabs-container">
+            <a href="flowers.html" class="tab">Rose</a>
+            <a href="jewelry.html" class="tab">Ring</a>
+            <a href="flowers.html" class="tab">Boquets</a>
+            <a href="chocolates.html" class="tab">Heart Blush Chocolate</a>
+            <a href="jewelry.html" class="tab">Bracelet</a>
+            <a href="chocolates.html" class="tab">Chocolates</a>
+        </div>
+    </div>
+
+    <!-- Slideshow Container -->
+    <div class="slideshow-container">
+        <h1>Valentine's Day Facts</h1>
+        <div class="slide active">❤️ In Finland, they celebrate Friends Day instead of Valentines Day. This day is spent with friends and not with lovers.</div>
+        <div class="slide">🌹 Red roses were the favorite flower of Venus, the Roman goddess of love.</div>
+        <div class="slide">💌 Origins in Ancient Rome: The holiday is believed to have originated from the Roman festival of Lupercalia.</div>
+        <div class="slide">🎁 Based on statistics, pet owners give gifts to their pets on this day.</div>
+        <div class="slide">🐶 Around 9 million pet owners buy Valentine’s gifts for their pets!</div>
+        <div class="slide">🍫 The first heart-shaped box of chocolates was created in 1861 by Richard Cadbury.</div>
+        <div class="slide">💖 Valentine's Day Cards: Over 1 billion Valentine’s Day cards are exchanged each year, making it the second-largest card-sending holiday after Christmas.</div>
+
+        <button class="prev" onclick="changeSlide(-1)">❮</button>
+        <button class="next" onclick="changeSlide(1)">❯</button>
+    </div>
+
+    <script>
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+
+        function changeSlide(n) {
+            slides[slideIndex].classList.remove('active');
+            slideIndex = (slideIndex + n + slides.length) % slides.length;
+            slides[slideIndex].classList.add('active');
+        }
+
+        function autoSlide() {
+            changeSlide(1);
+        }
+
+        setInterval(autoSlide, 5000); // Auto-slide every 3 seconds
+        // Floating Hearts Effect
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.classList.add('heart');
+            document.querySelector('.heart-container').appendChild(heart);
+    
+            const size = Math.random() * 20 + 10; // Random size
+            heart.style.fontSize = `${size}px`;
+            heart.style.left = `${Math.random() * 100}vw`; // Random horizontal position
+            heart.style.animationDuration = `${Math.random() * 3 + 3}s`; // Random speed
+    
+            setTimeout(() => {
+                heart.remove();
+            }, 5000); // Remove heart after animation ends
+        }
+    
+        setInterval(createHeart, 500); // Create hearts every 0.5s
+    
+        // Countdown Timer
+        function updateCountdown() {
+            const targetDate = new Date("February 14, 2025 00:00:00").getTime();
+            const now = new Date().getTime();
+            const timeLeft = targetDate - now;
+    
+            if (timeLeft < 0) {
+                document.getElementById("countdown").innerHTML = "💘 Happy Valentine's Day! 💘";
+                clearInterval(countdownTimer);
+                return;
+            }
+    
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+    
+            document.getElementById("days").innerText = days;
+            document.getElementById("hours").innerText = hours;
+            document.getElementById("minutes").innerText = minutes;
+            document.getElementById("seconds").innerText = seconds;
+        }
+    
+        const countdownTimer = setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+    <footer>
+        <div class="footer-container">
+           
+    
+            <!-- Quick Links Section -->
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="val.html">🏠Home</a>
+                <a href="personalisedllandp.html">💌Personalised Letters and Poems</a>
+                <a href="quiz.html">🤍Compatibility quizzes</a>
+                <a href="scrapbook.html">📸Scrapbook</a>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="diy.html">🎨DIY Date Ideas</a>
+                <a href="calender.html">📆Date Planner</a>
+                <a href="homemade.html">🍽️Homemade Dinner Ideas</a>
+
+            </div>
+    
+            <!-- Social Media Section -->
+            <div class="footer-section">
+                <h3>Follow Us On Instagram</h3>
+                <p><a href="https://www.instagram.com/_.nehehe._/">Instagram: _.nehehe._</a></p>
+                <p><a href="https://www.instagram.com/_._a.r.y.a.a_._/">Instagram: _._a.r.y.a.a_._</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Email</h3>
+                <p><a href="https://mail.google.com/mail/?view=cm&fs=1&to=nehamanoj1105@gmail.com" target="_blank">📧 nehamanoj1105@gmail.com</a></p>
+                <p><a href="https://mail.google.com/mail/?view=cm&fs=1&to=arya118251.2005@gmail.com" target="_blank">📧 arya118251.2005@gmail.com</a></p>
+
+            </div>
+            
+        </div>
+        <p class="footer-text">© 2025 Valentine's Special. All rights reserved.</p>
+    </footer>
+</body>
+</html>

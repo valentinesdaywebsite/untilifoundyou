@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day Shop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Dancing Script', cursive;
+            text-align: center;
+            background-color: #ffe6e6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: rgb(228, 89, 112);
+            padding: 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .site-name {
+            font-size: 54px;
+            font-weight: bold;
+            font-family: 'Dancing Script', cursive;
+        }
+        .site-name a {
+            text-decoration: none; /* Removes the underline */
+            color: white; /* Ensures the text is white */
+        }
+
+        nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        nav button, .login-button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            font-family: 'Playfair Display';
+            cursor: pointer;
+            padding: 10px 15px;
+            transition: 0.3s;
+        }
+        nav button a {
+            text-decoration: none; /* Removes the underline */
+            color: white; /* Ensures the text is white */
+        }
+
+
+        nav button:hover, .login-button:hover {
+            color: #ffebcd;
+            
+        }
+
+        h1 {
+            font-size: 44px;
+            margin-top: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .category {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .category div {
+            width: 350px;
+            height: 230px;
+            background: #ffcccc;
+            padding: 20px;
+            margin: 15px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.5s ease-in-out, background 0.5s ease-in-out;
+        }
+
+        .category div a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+
+        .category div:hover {
+            transform: scale(1.1);
+            background-color: #ff9999;
+        }
+        footer {
+            background-color: #c44242;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            width: 100%;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin: 10px;
+            text-align: center;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+
+        .footer-section a, .footer-section p {
+            display: block;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            margin-bottom: 5px;
+            font-family: 'Playfair Display';
+
+        }
+
+        .footer-section a:hover {
+            text-decoration: underline;
+        }
+
+        .app-icon {
+            width: 150px;
+            margin: 5px;
+        }
+
+        .footer-text {
+            font-size: 14px;
+            margin-top: 15px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+        /* Floating hearts */
+        .heart-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            color: rgb(215, 34, 94);
+            font-size: 20px;
+            animation: float 5s linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+        }
+        /* Dropdown Styling */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropbtn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            font-family: 'Playfair Display';
+            cursor: pointer;
+            padding: 10px 15px;
+            transition: 0.3s;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: rgb(228, 89, 112);
+            min-width: 250px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 8px;
+            text-align: left;
+            
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            display: block;
+            text-decoration: none;
+            font-size: 20px;
+            font-family: 'Playfair Display';
+        }
+
+        .dropdown-content a:hover {
+            background-color: rgb(200, 40, 70);
+        }
+
+        /* Show dropdown on hover */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            color: #ffebcd;
+        }
+        nav button a:hover {
+            color: #ffebcd;
+        }
+
+        .site-name a {
+            font-size: 54px;
+            text-decoration: none;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="heart-container"></div>
+
+    <header>
+        <div class="site-name"><a href="index.html">Until I Found You</a></div>
+        <nav>
+            <button><a href="gift.html">Gifts & Ideas</a></button>
+    
+            <!-- Dropdown Menu for Quiz & Fun -->
+            <div class="dropdown">
+                <button class="dropbtn">Quiz & Fun</button>
+                <div class="dropdown-content">
+                    <a href="personalisedllandp.html">💌 Personalized Love Letter and Poems</a>
+                    <a href="quiz.html">❤️ Compatibility Quizzes</a>
+                    <a href="scrapbook.html">📖 Scrapbook</a>
+                </div>
+            </div>
+    
+            <div class="dropdown">
+                <button class="dropbtn">Date Planner</button>
+                <div class="dropdown-content">
+                    <a href="calender.html">📅 Calendar</a>
+                    <a href="diy.html">🎨 DIY Date Ideas</a>
+                    <a href="homemade.html">🍽️ Homemade Dinner Ideas</a>
+                    <a href="map.html">🗺️ Google Map Integration</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <h1>Valentine's Day Gift Shop</h1>
+        <div class="category">
+            <div><a href="chocolates.html">Chocolates</a></div>
+            <div><a href="flowers.html">Flowers</a></div>
+            <div><a href="jewelry.html">Jewelry</a></div>
+            <div><a href="scrapbook.html">Treats for your loved ones</a></div>
+            <div><a href="scrapbook.html">Cups & Mugs</a></div>
+            <div><a href="scrapbook.html">Gift Cards</a></div>
+            <div><a href="scrapbook.html">Stuffed Toys</a></div>
+            <div><a href="scrapbook.html">Handwritten Letters</a></div>
+            <div><a href="scrapbook.html">Keychains</a></div>
+        </div>
+    </div>
+    <footer>
+        <div class="footer-container">
+           
+    
+            <!-- Quick Links Section -->
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="val.html">🏠Home</a>
+                <a href="about.html">📆Date & Ideas</a>
+                <a href="contact.html">🎁Gift & Ideas</a>
+
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="contact.html">🧸Quiz & Fun</a>
+                <a href="gifts.html">🗓️Date Planner</a>
+                <a href="gifts.html">🔑Login</a>
+
+            </div>
+    
+            <!-- Social Media Section -->
+            <div class="footer-section">
+                <h3>Follow Us On Instagram</h3>
+                <p><a href="https://www.instagram.com/_.nehehe._/">Instagram: _.nehehe._</a></p>
+                <p><a href="https://www.instagram.com/_._a.r.y.a.a_._/">Instagram: _._a.r.y.a.a_._</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Email</h3>
+                <p><a href="https://mail.google.com/mail/?view=cm&fs=1&to=nehamanoj1105@gmail.com" target="_blank">📧 nehamanoj1105@gmail.com</a></p>
+                <p><a href="https://mail.google.com/mail/?view=cm&fs=1&to=arya118251.2005@gmail.com" target="_blank">📧 arya118251.2005@gmail.com</a></p>
+
+            </div>
+            
+        </div>
+        <p class="footer-text">© 2025 Valentine's Special. All rights reserved.</p>
+    </div>
+    </footer>
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.classList.add('heart');
+            document.querySelector('.heart-container').appendChild(heart);
+    
+            const size = Math.random() * 20 + 10; // Random size
+            heart.style.fontSize = `${size}px`;
+            heart.style.left = `${Math.random() * 100}vw`; // Random horizontal position
+            heart.style.animationDuration = `${Math.random() * 3 + 3}s`; // Random speed
+    
+            setTimeout(() => {
+                heart.remove();
+            }, 5000); // Remove heart after animation ends
+        }
+    
+        setInterval(createHeart, 500); // Create hearts every 0.5s
+    </script>
+
+</body>
+
+</html>

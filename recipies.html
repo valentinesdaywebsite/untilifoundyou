@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chocolates - Valentine's Special</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Dancing Script', cursive;
+            text-align: center;
+            background-color: #ffe6e6;
+        }
+        /* Floating hearts */
+        .heart-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            color: rgb(215, 34, 94);
+            font-size: 20px;
+            animation: float 5s linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+        }
+
+        header {
+            background-color: rgb(228, 89, 112);
+            padding: 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .site-name {
+            font-size: 54px;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 24px;
+            font-family: 'Playfair Display';
+            padding: 10px 15px;
+        }
+
+        nav a:hover {
+            color: #ffebcd;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 44px;
+            margin-bottom: 20px;
+        }
+
+        .chocolates-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .chocolate-card {
+            background: #ffcccc;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+            text-align: center;
+            width: 300px;
+        }
+
+        .chocolate-card img {
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+        }
+
+        .chocolate-card h2 {
+            font-size: 26px;
+            margin: 10px 0;
+        }
+
+        .chocolate-card p {
+            font-size: 20px;
+            margin: 5px 0;
+        }
+
+        .add-to-cart {
+            background-color: #c44242;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .add-to-cart:hover {
+            background-color: #a02e2e;
+        }
+
+        .cart {
+            background: #ff9999;
+            padding: 15px;
+            margin-top: 30px;
+            border-radius: 10px;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .cart h2 {
+            font-size: 28px;
+        }
+
+        .cart-items {
+            text-align: left;
+        }
+
+        .cart-total {
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .checkout-btn {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .checkout-btn:hover {
+            background-color: darkgreen;
+        }
+        footer {
+            background-color: #c44242;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            width: 100%;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin: 10px;
+            text-align: center;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+
+        .footer-section a, .footer-section p {
+            display: block;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            margin-bottom: 5px;
+            font-family: 'Playfair Display';
+
+        }
+
+        .footer-section a:hover {
+            text-decoration: underline;
+        }
+        /* Dropdown Styling */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropbtn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            font-family: 'Playfair Display';
+            cursor: pointer;
+            padding: 10px 15px;
+            transition: 0.3s;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: rgb(228, 89, 112);
+            min-width: 250px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 8px;
+            text-align: left;
+            
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            display: block;
+            text-decoration: none;
+            font-size: 20px;
+            font-family: 'Playfair Display';
+        }
+
+        .dropdown-content a:hover {
+            background-color: rgb(200, 40, 70);
+        }
+
+        /* Show dropdown on hover */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            color: #ffebcd;
+        }
+        button:hover {
+            transform: scale(1.1);
+        }
+        @media screen and (max-width: 768px) {
+    .site-name {
+        font-size: 36px; /* Reduce title size */
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav a, .dropbtn {
+        font-size: 18px; /* Reduce font size */
+        padding: 8px 12px;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    .chocolates-grid {
+        flex-direction: column; /* Stack cards */
+        align-items: center;
+    }
+
+    .chocolate-card {
+        width: 90%;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .site-name {
+        font-size: 28px;
+    }
+
+    .chocolates-grid {
+        gap: 10px;
+    }
+
+    .chocolate-card {
+        width: 95%; /* Make cards full width */
+    }
+
+    .footer-section {
+        text-align: center;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="heart-container"></div>
+    <header>
+        <div class="site-name"><a href="index.html">Until I Found You</a></div>
+
+        <nav>
+            <button><a href="gift.html">Gifts & Ideas</a></button>
+    
+            <!-- Dropdown Menu for Quiz & Fun -->
+            <div class="dropdown">
+                <button class="dropbtn">Quiz & Fun</button>
+                <div class="dropdown-content">
+                    <a href="personalisedllandp.html">💌 Personalized Love Letter and Poems</a>
+                    <a href="quiz.html">❤️ Compatibility Quizzes</a>
+                    <a href="scrapbook.html">📖 Scrapbook</a>
+                </div>
+            </div>
+    
+            <div class="dropdown">
+                <button class="dropbtn">Date Planner</button>
+                <div class="dropdown-content">
+                    <a href="calender.html">📅 Calendar</a>
+                    <a href="diy.html">🎨 DIY Date Ideas</a>
+                    <a href="homemade.html">🍽️ Homemade Dinner Ideas</a>
+                    <a href="map.html">🗺️ Google Map Integration</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Recipe ideas for this Valentines Day!</h1>
+        <div class="chocolates-grid">
+            <div class="chocolate-card">
+                <img src="https://i.ytimg.com/an_webp/4FQ8rj_Oisw/mqdefault_6s.webp?du=3000&sqp=CJi-oL0G&rs=AOn4CLC3wS92OgWNh28soDSvhJz3AXgpqA">
+                <h2>Easy potato crepe</h2>
+                <p>wait for just 10 minutes to get a bite of this yummy recipe</p>
+                <a href="https://youtu.be/pqpDYRZ3pYQ?si=lZPZIs-EtWcrzreJ" target="_blank">
+                    <button style="background-color: #ff4d4d; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-size: 14px;">
+                        Click here to see how it's made
+                    </button>
+                </a>
+            </div>
+            <div class="chocolate-card">
+                <img src="https://i.ytimg.com/an_webp/_HonL1arbaA/mqdefault_6s.webp?du=3000&sqp=CLCXoL0G&rs=AOn4CLCMPj0L4xaqxuBkE838yfMTEJmd1w">
+                <h2>Oreo Cake</h2>
+                <p>a quick chocolatey recipe with just three ingredients</p>
+                <a href="https://www.youtube.com/shorts/_HonL1arbaA" target="_blank">
+                    <button style="background-color: #ff4d4d; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-size: 14px;">
+                        Click here to see how it's made
+                    </button>
+                </a>
+            </div>
+            <div class="chocolate-card">
+                <img src="https://i.ytimg.com/an_webp/tkTl2dBqmQY/mqdefault_6s.webp?du=3000&sqp=CLTQoL0G&rs=AOn4CLD8n_4ga1Mogq0b1MfYS6rRTcDtsg">
+                <h2>Hot Chocolate</h2>
+                <p>a sweet hot chocolate recipe to make your day even sweeter</p>
+                <a href="https://www.youtube.com/shorts/tkTl2dBqmQY" target="_blank">
+                    <button style="background-color: #ff4d4d; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-size: 14px;">
+                        Click here to see how it's made
+                    </button>
+                </a>
+            </div>
+            <div class="chocolate-card">
+                <img src="https://i.ytimg.com/an_webp/rLZ1tCMsxR8/mqdefault_6s.webp?du=3000&sqp=CPSpoL0G&rs=AOn4CLDLCRbL-J1tGgwO7-dbK2WEyVmhFg">
+                <h2>Frech toast</h2>
+                <p>A delicieuse recipe with just 3 ingredients, Apprécier!</p>
+                <a href="https://www.youtube.com/shorts/rLZ1tCMsxR8" target="_blank">
+                    <button style="background-color: #ff4d4d; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-size: 14px;">
+                        Click here to see how it's made
+                    </button>
+                </a>
+            </div>
+            <div class="chocolate-card">
+                <img src="https://i.ytimg.com/vi/qtKXQUaH9Jc/hqdefault.jpg?sqp=-oaymwEnCPYBEIoBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLDiB5eQ8ESt_9LTjxgrzM2M10HRXQ">
+                <h2>Makhnann Roti</h2>
+                <p>Hungry? here's an easy 10 minute recipe </p>
+                <a href="https://www.youtube.com/watch?v=qtKXQUaH9Jc" target="_blank">
+                    <button style="background-color: #ff4d4d; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-size: 14px;">
+                        Click here to see how it's made
+                    </button>
+                </a>
+            </div>
+            <div class="chocolate-card">
+                <img src="https://i.ytimg.com/an_webp/nIaE2krPFgg/mqdefault_6s.webp?du=3000&sqp=CKiwoL0G&rs=AOn4CLDM0D0vkuYJPrDuceLGfyevj2RJGA">
+                <h2>Creamy Pasta</h2>
+                <p>A no maida cremy pasta delight</p>
+                <a href="https://www.youtube.com/shorts/nIaE2krPFgg" target="_blank">
+                    <button style="background-color: #ff4d4d; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-size: 14px;">
+                        Click here to see how it's made
+                    </button>
+                </a>
+            </div>
+            
+            
+    </div>
+    </div>
+    <footer>
+    
+    <div class="footer-container">
+           
+    
+            <!-- Quick Links Section -->
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="val.html">🏠Home</a>
+                <a href="about.html">📆Date & Ideas</a>
+                <a href="contact.html">🎁Gift & Ideas</a>
+
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="contact.html">🧸Quiz & Fun</a>
+                <a href="gifts.html">🗓Date Planner</a>
+                <a href="gifts.html">🔑Login</a>
+
+            </div>
+    
+            <!-- Social Media Section -->
+            <div class="footer-section">
+                <h3>Follow Us On Instagram</h3>
+                <p><a href="https://www.instagram.com/.nehehe./">Instagram: .nehehe.</a></p>
+                <p><a href="https://www.instagram.com/._a.r.y.a.a./">Instagram: _._a.r.y.a.a._</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Email</h3>
+                <p><a href="https://mail.google.com/mail/?view=cm&fs=1&to=nehamanoj1105@gmail.com" target="_blank">📧 nehamanoj1105@gmail.com</a></p>
+                <p><a href="https://mail.google.com/mail/?view=cm&fs=1&to=arya118251.2005@gmail.com" target="_blank">📧 arya118251.2005@gmail.com</a></p>
+
+            </div>
+            
+        </div>
+        <p class="footer-text">© 2025 Valentine's Special. All rights reserved.</p>
+    </div>
+    </footer>
+
+    <script>
+        // Floating hearts effect
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.classList.add('heart');
+            document.querySelector('.heart-container').appendChild(heart);
+
+            const size = Math.random() * 20 + 10; // Random size
+            heart.style.fontSize = `${size}px`;
+            heart.style.left = `${Math.random() * 100}vw`; // Random position
+            heart.style.animationDuration = `${Math.random() * 3 + 3}s`; // Random speed
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000); // Remove heart after animation
+        }
+
+        setInterval(createHeart, 500); // Create hearts every 0.5s
+    </script>
+</body>
+</html>

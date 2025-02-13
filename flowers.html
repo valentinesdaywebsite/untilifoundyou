@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flowers - Valentine's Special</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Dancing Script', cursive;
+            text-align: center;
+            background-color: #ffe6e6;
+        }
+
+        header {
+            background-color: rgb(228, 89, 112);
+            padding: 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .site-name a {
+            font-size: 54px;
+            text-decoration: none;
+            color: white;
+        }
+        .site-name a {
+            font-size: 54px;
+            text-decoration: none;
+            color: white;
+        }
+
+
+        nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 24px;
+            font-family: 'Playfair Display';
+            padding: 10px 15px;
+        }
+
+        nav a:hover {
+            color: #ffebcd;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 44px;
+            margin-bottom: 20px;
+        }
+
+        .flowers-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .flower-card {
+            background: #ffcccc;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+            text-align: center;
+            width: 300px;
+        }
+
+        .flower-card img {
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+        }
+
+        .flower-card h2 {
+            font-size: 26px;
+            margin: 10px 0;
+        }
+
+        .flower-card p {
+            font-size: 20px;
+            margin: 5px 0;
+        }
+
+        .add-to-cart {
+            background-color: #c44242;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .add-to-cart:hover {
+            background-color: #a02e2e;
+        }
+
+        .cart {
+            background: #ff9999;
+            padding: 15px;
+            margin-top: 30px;
+            border-radius: 10px;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .cart h2 {
+            font-size: 28px;
+        }
+
+        .cart-items {
+            text-align: left;
+        }
+
+        .cart-total {
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .checkout-btn {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .checkout-btn:hover {
+            background-color: darkgreen;
+        }
+
+        footer {
+            background-color: #c44242;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            width: 100%;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin: 10px;
+            text-align: center;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+
+        .footer-section a, .footer-section p {
+            display: block;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            margin-bottom: 5px;
+            font-family: 'Playfair Display';
+
+        }
+
+        .footer-section a:hover {
+            text-decoration: underline;
+        }
+        /* Dropdown Styling */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropbtn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            font-family: 'Playfair Display';
+            cursor: pointer;
+            padding: 10px 15px;
+            transition: 0.3s;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: rgb(228, 89, 112);
+            min-width: 250px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 8px;
+            text-align: left;
+            
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            display: block;
+            text-decoration: none;
+            font-size: 20px;
+            font-family: 'Playfair Display';
+        }
+
+        .dropdown-content a:hover {
+            background-color: rgb(200, 40, 70);
+        }
+
+        /* Show dropdown on hover */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            color: #ffebcd;
+        }
+        nav button {
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        nav button a {
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+            font-size: 24px;
+            font-family: 'Playfair Display';
+            padding: 10px 15px;
+        }
+
+        nav button a:hover {
+            color: #ffebcd;
+        }
+        @media (max-width: 1024px) {
+    .container {
+        padding: 10px;
+    }
+
+    .site-name a {
+        font-size: 40px;
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    nav a, .dropbtn {
+        font-size: 20px;
+        padding: 8px 12px;
+    }
+
+    .flowers-grid {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .flower-card {
+        width: 280px;
+        padding: 10px;
+    }
+
+    .flower-card h2 {
+        font-size: 22px;
+    }
+
+    .cart {
+        max-width: 90%;
+        padding: 10px;
+    }
+
+    .checkout-btn {
+        font-size: 18px;
+        padding: 8px 16px;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+    }
+
+    .site-name a {
+        font-size: 34px;
+    }
+
+    nav {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    nav button, .dropbtn {
+        font-size: 18px;
+        padding: 6px 10px;
+    }
+
+    .flowers-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .flower-card {
+        width: 90%;
+    }
+
+    .flower-card img {
+        height: 180px;
+    }
+
+    .cart h2, .cart-total {
+        font-size: 22px;
+    }
+
+    .checkout-btn {
+        font-size: 16px;
+        padding: 8px 12px;
+    }
+
+    footer {
+        padding: 15px;
+    }
+
+    .footer-container {
+        flex-direction: column;
+    }
+
+    .footer-section {
+        min-width: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .site-name a {
+        font-size: 28px;
+    }
+
+    nav a, .dropbtn {
+        font-size: 16px;
+        padding: 5px 8px;
+    }
+
+    .container {
+        padding: 5px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .flower-card {
+        width: 95%;
+        padding: 8px;
+    }
+
+    .flower-card img {
+        height: 150px;
+    }
+
+    .flower-card h2 {
+        font-size: 20px;
+    }
+
+    .add-to-cart {
+        font-size: 16px;
+        padding: 8px;
+    }
+
+    .cart {
+        width: 100%;
+        padding: 8px;
+    }
+
+    .cart h2 {
+        font-size: 20px;
+    }
+
+    .checkout-btn {
+        font-size: 14px;
+        padding: 6px 10px;
+    }
+
+    .footer-text {
+        font-size: 14px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="site-name"><a href="index.html">Until I Found You</a></div>
+
+        <nav>
+            <button><a href="gift.html">Gifts & Ideas</a></button>
+    
+            <!-- Dropdown Menu for Quiz & Fun -->
+            <div class="dropdown">
+                <button class="dropbtn">Quiz & Fun</button>
+                <div class="dropdown-content">
+                    <a href="personalisedllandp.html">💌 Personalized Love Letter and Poems</a>
+                    <a href="quiz.html">❤️ Compatibility Quizzes</a>
+                    <a href="scrapbook.html">📖 Scrapbook</a>
+                </div>
+            </div>
+    
+            <div class="dropdown">
+                <button class="dropbtn">Date Planner</button>
+                <div class="dropdown-content">
+                    <a href="calender.html">📅 Calendar</a>
+                    <a href="diy.html">🎨 DIY Date Ideas</a>
+                    <a href="homemade.html">🍽️ Homemade Dinner Ideas</a>
+                    <a href="map.html">🗺️ Google Map Integration</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Choose Your Flowers</h1>
+        <p>Prices May Vary Depending On Availability</p>
+        <br>
+        <br>
+        <div class="flowers-grid">
+            <div class="flower-card">
+                <img src="https://imgs.search.brave.com/p7sfv64d9ivQCBY0mjhRTyKQ5qgITG8_2RSkXEOb70w/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTAy/NDE2NDE0L3Bob3Rv/L3dvbWFuLWhvbGRp/bmctYS1zaW5nbGUt/cm9zZS1jbG9zZS11/cC1vZi1oYW5kLmpw/Zz9zPTYxMng2MTIm/dz0wJms9MjAmYz1Y/bFcyaW1mQ0lYYk04/ZF83azF1TzdtQmd2/NjhUd0o5cm55azV6/M1g2R3UwPQ">
+                <h2>Red Roses</h2>
+                <!-- <p>₹500</p> -->
+                <button class="add-to-cart" data-name="Red Roses" data-price="500">Add to Cart</button>
+            </div>
+            <div class="flower-card">
+                <img src="https://imgs.search.brave.com/TRD9eKPRs1rTdeSV9Xr4DlnNy6qQCTUfA3PuuUigd9Y/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvNjY1/MzY0ODQyL3Bob3Rv/L3R1bGlwLWZsb3dl/cnMuanBnP3M9NjEy/eDYxMiZ3PTAmaz0y/MCZjPVZtcDJ3OFEx/UEloMGlHbDV5VmEw/blFmLS1FTzFRNS1L/MTRHUUd3bUt2RjQ9">
+                <h2>Pink Tulips</h2>
+                <!-- <p>₹400</p> -->
+                <button class="add-to-cart" data-name="Pink Lilies" data-price="400">Add to Cart</button>
+            </div>
+            <div class="flower-card">
+                <img src="https://imgs.search.brave.com/0VfNBkGsNpUmQoVu_jYM3H0Vas2SZx7ZaO_ObWrn-pA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvODE3/MTE5MDYvcGhvdG8v/dHdvLXdoaXRlLXJv/c2VzLmpwZz9zPTYx/Mng2MTImdz0wJms9/MjAmYz1YSm85MTMy/NW45X01JdlVoeE9R/dm05elRBd21xWFNB/NGJUWDZVTHYtNWVR/PQ">
+                <h2>White Roses</h2>
+                <!-- <p>₹500</p> -->
+                <button class="add-to-cart" data-name="Red Roses" data-price="500">Add to Cart</button>
+            </div>
+            <div class="flower-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzWd7h-j37sx-XfozN_W_Sin8BVPluFun7oQ&s">
+                <h2>Boquet Of Roses</h2>
+                <!-- <p>₹400</p> -->
+                <button class="add-to-cart" data-name="Pink Lilies" data-price="400">Add to Cart</button>
+            </div>
+            <div class="flower-card">
+                <img src="https://imgs.search.brave.com/NcaRSQbfOfDTnFOz9DYX0MJ-Qk8Zo2IQ5Bd7Wow20TY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvODc1/MzQyNzYyL3Bob3Rv/L2JlYXV0aWZ1bC1w/aW5rLWxvdHVzLWZs/b3dlci5qcGc_cz02/MTJ4NjEyJnc9MCZr/PTIwJmM9MW5ISW5V/ZlZxZTVpU0Nualc0/UVRjY1ViTF9TUkhR/Z2FZUEVoTFRzT2tZ/ST0">
+                <h2>Lotus</h2>
+                <!-- <p>₹500</p> -->
+                <button class="add-to-cart" data-name="Red Roses" data-price="500">Add to Cart</button>
+            </div>
+            <div class="flower-card">
+                <img src="https://imgs.search.brave.com/yOZ41MTglk7B25Lmz03TFWflO3-oqDF1G8heLz-l1AA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLmV0/c3lzdGF0aWMuY29t/LzQ4MDcwNTgxL3Iv/aWwvNTE1MjNlLzU3/NTQyMTk0NjAvaWxf/NjAweDYwMC41NzU0/MjE5NDYwX2luODEu/anBn">
+                <h2>Paper Roses</h2>
+                <!-- <p>₹400</p> -->
+                <button class="add-to-cart" data-name="Pink Lilies" data-price="400">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="cart">
+        <h2>Your Cart</h2>
+        <div class="cart-items"></div>
+        <p class="cart-total">Total: ₹0</p>
+        <button class="checkout-btn">Checkout</button>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+           
+    
+            <!-- Quick Links Section -->
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="val.html">🏠Home</a>
+                <a href="about.html">📆Date & Ideas</a>
+                <a href="contact.html">🎁Gift & Ideas</a>
+
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="contact.html">🧸Quiz & Fun</a>
+                <a href="gifts.html">🗓️Date Planner</a>
+                <a href="gifts.html">🔑Login</a>
+
+            </div>
+    
+            <!-- Social Media Section -->
+            <div class="footer-section">
+                <h3>Follow Us On Instagram</h3>
+                <p><a href="https://www.instagram.com/_.nehehe._/">Instagram: _.nehehe._</a></p>
+                <p><a href="https://www.instagram.com/_._a.r.y.a.a_._/">Instagram: _._a.r.y.a.a_._</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Email</h3>
+                <p><a href="https://mail.google.com/mail/?view=cm&fs=1&to=nehamanoj1105@gmail.com" target="_blank">📧 nehamanoj1105@gmail.com</a></p>
+                <p><a href="https://mail.google.com/mail/?view=cm&fs=1&to=arya118251.2005@gmail.com" target="_blank">📧 arya118251.2005@gmail.com</a></p>
+
+            </div>
+            
+        </div>
+        <p class="footer-text">© 2025 Valentine's Special. All rights reserved.</p>
+    </div>
+    </footer>
+
+    <script>
+        let cart = [];
+
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                let name = this.getAttribute('data-name');
+                let price = parseInt(this.getAttribute('data-price'));
+
+                cart.push({ name, price });
+                updateCart();
+            });
+        });
+
+        function updateCart() {
+            let cartItems = document.querySelector('.cart-items');
+            let cartTotal = document.querySelector('.cart-total');
+
+            cartItems.innerHTML = '';
+            let total = 0;
+
+            cart.forEach(item => {
+                cartItems.innerHTML += `<p>${item.name} - ₹${item.price}</p>`;
+                total += item.price;
+            });
+
+            cartTotal.textContent = `Total: ₹${total}`;
+        }
+
+        document.querySelector('.checkout-btn').addEventListener('click', function() {
+            if (cart.length === 0) {
+                alert("Your cart is empty!");
+                return;
+            }
+
+            let customerName = prompt("Enter your name:");
+            let customerContact = prompt("Enter your contact number:");
+
+            if (!customerName || !customerContact) {
+                alert("Please enter valid details.");
+                return;
+            }
+
+            let orderDetails = cart.map(item => `${item.name} - ₹${item.price}`).join("%0A");
+            let totalAmount = cart.reduce((sum, item) => sum + item.price, 0);
+            let message = `New Order:%0A👤 Name: ${customerName}%0A📞 Contact: ${customerContact}%0A💐 Flowers Ordered:%0A${orderDetails}%0A💰 Total: ₹${totalAmount}`;
+            let phoneNumber = "8921198980";
+            let whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
+
+            window.location.href = whatsappURL;
+        });
+    </script>
+</body>
+</html>
